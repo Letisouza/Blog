@@ -1,0 +1,23 @@
+---
+title: "Hello, world"
+description: |
+  Este é um post de apresentação.
+author:
+  - name: Leticia de Souza
+    url: https://letisouza.github.io/Blog/
+date: 2021-12-06
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Distill is a publication format for scientific and technical writing, native to the web.
+
+Learn more about using Distill at <https://rstudio.github.io/distill>.
+
+

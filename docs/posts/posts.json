@@ -15,5 +15,22 @@
     "preview": {},
     "last_modified": "2021-12-06T21:38:10-03:00",
     "input_file": {}
+  },
+  {
+    "path": "posts/2021-12-06-hello-world/",
+    "title": "Hello, world",
+    "description": "Este é um post de apresentação.",
+    "author": [
+      {
+        "name": "Leticia de Souza",
+        "url": "https://letisouza.github.io/Blog/"
+      }
+    ],
+    "date": "2021-12-06",
+    "categories": [],
+    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-12-06T21:56:54-03:00",
+    "input_file": "hello-world.knit.md"
   }
 ]
