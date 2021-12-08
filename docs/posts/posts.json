@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-12-06-hello-world/",
+    "title": "Base RAIS",
+    "description": "Análise dos salários da base RAIS",
+    "author": [
+      {
+        "name": "Leticia de Souza",
+        "url": "https://letisouza.github.io/Blog/"
+      }
+    ],
+    "date": "2021-12-07",
+    "categories": [],
+    "contents": "\r\n\r\n\r\n\r\nNesse relatório, o interesse é responder: Quanto ganha um cientista de dados?\r\nRAIS significa Relação Anual de Informações Sociais, do Ministério da Economia. São dados recebidos das empresas com vínculos formais e utilizados para saber sobre geração de emprego e desemprego, ganhos médios por área de atuação, etc. Ela tem duas visões distintas, uma sobre estabelecimentos e outra sobre pessoas/trabalhadores. A base é aberta, mas não contém identificação de empresa ou pessoas.\r\nPara acessar, a inciativa Base dos Dados coleta esses microdados por meio do datalake.\r\nRAIS\r\nCódigo que carrega tabela de microdados via conexão com SGDB\r\n\r\n\r\nconexao <- dbConnect(\r\n  bigquery(),\r\n  project = \"basedosdados\", # nome do repositório\r\n  dataset = \"br_me_rais\", # nome da base\r\n  billing = \"rais-2021-cursor\" # id do projeto na Bando dos Dados\r\n)\r\n\r\ncinco_linhas <- collect(head(select(tbl(conexao, \"microdados_vinculos\"),everything()), 5))\r\n\r\n\r\n\r\n\r\nano\r\nsigla_uf\r\nid_municipio\r\ntipo_vinculo\r\nvinculo_ativo_3112\r\ntipo_admissao\r\nmes_admissao\r\nmes_desligamento\r\nmotivo_desligamento\r\ncausa_desligamento_1\r\ncausa_desligamento_2\r\ncausa_desligamento_3\r\nfaixa_tempo_emprego\r\ntempo_emprego\r\nfaixa_horas_contratadas\r\nquantidade_horas_contratadas\r\nid_municipio_trabalho\r\nquantidade_dias_afastamento\r\nindicador_cei_vinculado\r\nindicador_trabalho_parcial\r\nindicador_trabalho_intermitente\r\nfaixa_remuneracao_media_sm\r\nvalor_remuneracao_media_sm\r\nvalor_remuneracao_media\r\nfaixa_remuneracao_dezembro_sm\r\nvalor_remuneracao_dezembro_sm\r\nvalor_remuneracao_janeiro\r\nvalor_remuneracao_fevereiro\r\nvalor_remuneracao_marco\r\nvalor_remuneracao_abril\r\nvalor_remuneracao_maio\r\nvalor_remuneracao_junho\r\nvalor_remuneracao_julho\r\nvalor_remuneracao_agosto\r\nvalor_remuneracao_setembro\r\nvalor_remuneracao_outubro\r\nvalor_remuneracao_novembro\r\nvalor_remuneracao_dezembro\r\ntipo_salario\r\nvalor_salario_contratual\r\nsubatividade_ibge\r\nsubsetor_ibge\r\ncbo_1994\r\ncbo_2002\r\ncnae_1\r\ncnae_2\r\ncnae_2_subclasse\r\nfaixa_etaria\r\nidade\r\ngrau_instrucao_1985_2005\r\ngrau_instrucao_apos_2005\r\nnacionalidade\r\nsexo\r\nraca_cor\r\nindicador_portador_deficiencia\r\ntipo_deficiencia\r\nano_chegada_brasil\r\ntamanho_estabelecimento\r\ntipo_estabelecimento\r\nnatureza_juridica\r\nindicador_simples\r\nbairros_sp\r\ndistritos_sp\r\nbairros_fortaleza\r\nbairros_rj\r\nregioes_administrativas_df\r\n1985\r\nAM\r\n1300102\r\n2\r\n1\r\nNA\r\n1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n3\r\n1.1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n2\r\n1.27\r\nNA\r\n3\r\n1.14\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n7014\r\n24\r\n39970\r\nNA\r\nNA\r\nNA\r\nNA\r\n6\r\nNA\r\n3\r\nNA\r\n10\r\n2\r\nNA\r\nNA\r\nNA\r\nNA\r\n7\r\n1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n1985\r\nAM\r\n1300102\r\n2\r\n1\r\nNA\r\n1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n3\r\n1.1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n2\r\n1.33\r\nNA\r\n3\r\n1.31\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n7014\r\n24\r\n39970\r\nNA\r\nNA\r\nNA\r\nNA\r\n5\r\nNA\r\n3\r\nNA\r\n10\r\n2\r\nNA\r\nNA\r\nNA\r\nNA\r\n7\r\n1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n1985\r\nAM\r\n1300102\r\n2\r\n1\r\nNA\r\n1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n3\r\n1.1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n3\r\n2.22\r\nNA\r\n3\r\n1.54\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n7014\r\n24\r\n14220\r\nNA\r\nNA\r\nNA\r\nNA\r\n3\r\nNA\r\n7\r\nNA\r\n10\r\n2\r\nNA\r\nNA\r\nNA\r\nNA\r\n7\r\n1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n1985\r\nAM\r\n1300102\r\n2\r\n1\r\nNA\r\n1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n3\r\n1.1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n3\r\n2.54\r\nNA\r\n5\r\n3.95\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n7014\r\n24\r\n14220\r\nNA\r\nNA\r\nNA\r\nNA\r\n7\r\nNA\r\n7\r\nNA\r\n10\r\n2\r\nNA\r\nNA\r\nNA\r\nNA\r\n7\r\n1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n1985\r\nAM\r\n1300102\r\n2\r\n1\r\nNA\r\n10\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n1\r\n0.2\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n5\r\n4.56\r\nNA\r\n5\r\n3.66\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n7014\r\n24\r\n14220\r\nNA\r\nNA\r\nNA\r\nNA\r\n3\r\nNA\r\n7\r\nNA\r\nNA\r\n2\r\nNA\r\nNA\r\nNA\r\nNA\r\n7\r\n1\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\nNA\r\n\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-12-07T22:00:38-03:00",
+    "input_file": "hello-world.knit.md"
+  },
+  {
     "path": "posts/welcome/",
     "title": "Welcome to Leticia de Souza",
     "description": "Welcome to our new blog, Leticia de Souza. We hope you enjoy \nreading what we have to say!",
@@ -15,22 +32,5 @@
     "preview": {},
     "last_modified": "2021-12-06T21:38:10-03:00",
     "input_file": {}
-  },
-  {
-    "path": "posts/2021-12-06-hello-world/",
-    "title": "Hello, world",
-    "description": "Este é um post de apresentação.",
-    "author": [
-      {
-        "name": "Leticia de Souza",
-        "url": "https://letisouza.github.io/Blog/"
-      }
-    ],
-    "date": "2021-12-06",
-    "categories": [],
-    "contents": "\r\nDistill is a publication format for scientific and technical writing, native to the web.\r\nLearn more about using Distill at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
-    "preview": {},
-    "last_modified": "2021-12-06T21:56:54-03:00",
-    "input_file": "hello-world.knit.md"
   }
 ]

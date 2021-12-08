@@ -17,5 +17,5 @@ usethis::use_github_pages("master", "/docs")
 file.create(".nojekyll")
 distill::create_blog(".", "Leticia de Souza", gh_pages = T)
 
-# Criando posts: gera um Rmd para edição de textos
+# Criando posts: gera um Rmd para edição de textos. Em geral, fazer no console.
 distill::create_post("Hello, world")

@@ -1,23 +1,51 @@
 ---
-title: "Hello, world"
+title: "Base RAIS"
 description: |
-  Este é um post de apresentação.
+  Análise dos salários da base RAIS
 author:
   - name: Leticia de Souza
     url: https://letisouza.github.io/Blog/
-date: 2021-12-06
+date: 2021-12-07
 output:
   distill::distill_article:
     self_contained: false
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+```{r, inclusde =F}
+library(bigrquery)
+library(dplyr)
+```
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+Nesse relatório, o interesse é responder: **Quanto ganha um cientista de dados?**
 
+RAIS significa Relação Anual de Informações Sociais, do Ministério da Economia. São dados recebidos das empresas com vínculos formais e utilizados para saber sobre geração de emprego e desemprego, ganhos médios por área de atuação, etc. Ela tem duas visões distintas, uma sobre estabelecimentos e outra sobre pessoas/trabalhadores. A base é aberta, mas não contém identificação de empresa ou pessoas. 
+
+
+Para acessar, a inciativa Base dos Dados coleta esses microdados por meio do datalake.
+
+[RAIS](https://basedosdados.org/dataset/br-me-rais)
+
+
+
+Código que carrega tabela de microdados via conexão com SGDB
+
+```{r, echo = T}
+conexao <- dbConnect(
+  bigquery(),
+  project = "basedosdados", # nome do repositório
+  dataset = "br_me_rais", # nome da base
+  billing = "rais-2021-cursor" # id do projeto na Bando dos Dados
+)
+
+cinco_linhas <- collect(head(select(tbl(conexao, "microdados_vinculos"),everything()), 5))
+```
+
+
+```{r, echo=F}
+knitr::kable(cinco_linhas)
+```
 
