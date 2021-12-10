@@ -117,7 +117,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["hello-world_files/anchor-4.2.2/anchor.min.js","hello-world_files/bowser-1.9.3/bowser.min.js","hello-world_files/distill-2.2.21/template.v2.js","hello-world_files/header-attrs-2.11/header-attrs.js","hello-world_files/jquery-3.6.0/jquery-3.6.0.js","hello-world_files/jquery-3.6.0/jquery-3.6.0.min.js","hello-world_files/jquery-3.6.0/jquery-3.6.0.min.map","hello-world_files/popper-2.6.0/popper.min.js","hello-world_files/tippy-6.2.7/tippy-bundle.umd.min.js","hello-world_files/tippy-6.2.7/tippy-light-border.css","hello-world_files/tippy-6.2.7/tippy.css","hello-world_files/tippy-6.2.7/tippy.umd.min.js","hello-world_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["hello-world_files/anchor-4.2.2/anchor.min.js","hello-world_files/bowser-1.9.3/bowser.min.js","hello-world_files/distill-2.2.21/template.v2.js","hello-world_files/figure-html5/unnamed-chunk-4-1.png","hello-world_files/figure-html5/unnamed-chunk-5-1.png","hello-world_files/figure-html5/unnamed-chunk-6-1.png","hello-world_files/figure-html5/unnamed-chunk-9-1.png","hello-world_files/header-attrs-2.11/header-attrs.js","hello-world_files/jquery-3.6.0/jquery-3.6.0.js","hello-world_files/jquery-3.6.0/jquery-3.6.0.min.js","hello-world_files/jquery-3.6.0/jquery-3.6.0.min.map","hello-world_files/popper-2.6.0/popper.min.js","hello-world_files/tippy-6.2.7/tippy-bundle.umd.min.js","hello-world_files/tippy-6.2.7/tippy-light-border.css","hello-world_files/tippy-6.2.7/tippy.css","hello-world_files/tippy-6.2.7/tippy.umd.min.js","hello-world_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1482,9 +1482,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<div class="layout-chunk" data-layout="l-body">
-
-</div>
 <p>Nesse relatório, o interesse é responder: <strong>Quanto ganha um cientista de dados?</strong></p>
 <p>RAIS significa Relação Anual de Informações Sociais, do Ministério da Economia. São dados recebidos das empresas com vínculos formais e utilizados para saber sobre geração de emprego e desemprego, ganhos médios por área de atuação, etc. Ela tem duas visões distintas, uma sobre estabelecimentos e outra sobre pessoas/trabalhadores. A base é aberta, mas não contém identificação de empresa ou pessoas.</p>
 <p>Para acessar, a inciativa Base dos Dados coleta esses microdados por meio do datalake.</p>
@@ -1498,494 +1495,350 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   dataset <span class='op'>=</span> <span class='st'>"br_me_rais"</span>, <span class='co'># nome da base</span>
   billing <span class='op'>=</span> <span class='st'>"rais-2021-cursor"</span> <span class='co'># id do projeto na Bando dos Dados</span>
 <span class='op'>)</span>
-
-<span class='va'>cinco_linhas</span> <span class='op'>&lt;-</span> <span class='fu'>collect</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>select</span><span class='op'>(</span><span class='fu'>tbl</span><span class='op'>(</span><span class='va'>conexao</span>, <span class='st'>"microdados_vinculos"</span><span class='op'>)</span>,<span class='fu'>everything</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
+<p>Queremos analisar a base de pessoas que <em>provavelmente</em> trabalham com ciências de dados. O Código Brasileiro de Ocupações (CBO) tem um o cadastro de todas as ocupações formais do Brasil,e iremos filtrar a base RAIS e analisar os códigos relacionados à ciência de dados, como os de pesquisa/cientista e estatística, desde 2013.</p>
 <div class="layout-chunk" data-layout="l-body">
-<table style="width:100%;">
-<colgroup>
-<col style="width: 0%" />
-<col style="width: 0%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 2%" />
-<col style="width: 1%" />
-<col style="width: 2%" />
-<col style="width: 1%" />
-<col style="width: 2%" />
-<col style="width: 2%" />
-<col style="width: 2%" />
-<col style="width: 2%" />
-<col style="width: 1%" />
-<col style="width: 2%" />
-<col style="width: 2%" />
-<col style="width: 2%" />
-<col style="width: 2%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 2%" />
-<col style="width: 2%" />
-<col style="width: 2%" />
-<col style="width: 2%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 0%" />
-<col style="width: 0%" />
-<col style="width: 0%" />
-<col style="width: 0%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 0%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 0%" />
-<col style="width: 0%" />
-<col style="width: 2%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 0%" />
-<col style="width: 1%" />
-<col style="width: 1%" />
-<col style="width: 0%" />
-<col style="width: 2%" />
-</colgroup>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>codigos_cbo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"252515"</span>, <span class='st'>"252525"</span>, <span class='st'>"211110"</span>, <span class='st'>"211205"</span>, <span class='st'>"211210"</span>,<span class='st'>"411035"</span>, <span class='st'>"131120"</span>,<span class='st'>"211215"</span><span class='op'>)</span>
+
+<span class='va'>tabela_microdados_vinculos</span> <span class='op'>&lt;-</span> <span class='fu'>tbl</span><span class='op'>(</span><span class='va'>conexao</span>, <span class='st'>"microdados_vinculos"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>select</span><span class='op'>(</span><span class='fu'>everything</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span>
+    <span class='va'>ano</span> <span class='op'>&gt;=</span> <span class='fl'>2013</span>,
+    <span class='va'>cbo_2002</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>codigos_cbo</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>collect</span><span class='op'>(</span><span class='op'>)</span> <span class='co'># traz os dados pra máquina local</span>
+
+<span class='fu'><a href='https://rdrr.io/r/base/readRDS.html'>saveRDS</a></span><span class='op'>(</span><span class='va'>tabela_microdados_vinculos</span>, <span class='st'>"tabela_microdados_vinculos.rds"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h2 id="como-a-média-salarial-varia-no-tempo"><strong>Como a média salarial varia no tempo?</strong></h2>
+<div class="layout-chunk" data-layout="l-body">
+<table>
 <thead>
 <tr class="header">
 <th style="text-align: right;">ano</th>
-<th style="text-align: left;">sigla_uf</th>
-<th style="text-align: left;">id_municipio</th>
-<th style="text-align: left;">tipo_vinculo</th>
-<th style="text-align: right;">vinculo_ativo_3112</th>
-<th style="text-align: left;">tipo_admissao</th>
-<th style="text-align: right;">mes_admissao</th>
-<th style="text-align: right;">mes_desligamento</th>
-<th style="text-align: left;">motivo_desligamento</th>
-<th style="text-align: left;">causa_desligamento_1</th>
-<th style="text-align: left;">causa_desligamento_2</th>
-<th style="text-align: left;">causa_desligamento_3</th>
-<th style="text-align: left;">faixa_tempo_emprego</th>
-<th style="text-align: right;">tempo_emprego</th>
-<th style="text-align: left;">faixa_horas_contratadas</th>
-<th style="text-align: right;">quantidade_horas_contratadas</th>
-<th style="text-align: left;">id_municipio_trabalho</th>
-<th style="text-align: right;">quantidade_dias_afastamento</th>
-<th style="text-align: right;">indicador_cei_vinculado</th>
-<th style="text-align: right;">indicador_trabalho_parcial</th>
-<th style="text-align: right;">indicador_trabalho_intermitente</th>
-<th style="text-align: left;">faixa_remuneracao_media_sm</th>
-<th style="text-align: right;">valor_remuneracao_media_sm</th>
-<th style="text-align: right;">valor_remuneracao_media</th>
-<th style="text-align: left;">faixa_remuneracao_dezembro_sm</th>
-<th style="text-align: right;">valor_remuneracao_dezembro_sm</th>
-<th style="text-align: right;">valor_remuneracao_janeiro</th>
-<th style="text-align: right;">valor_remuneracao_fevereiro</th>
-<th style="text-align: right;">valor_remuneracao_marco</th>
-<th style="text-align: right;">valor_remuneracao_abril</th>
-<th style="text-align: right;">valor_remuneracao_maio</th>
-<th style="text-align: right;">valor_remuneracao_junho</th>
-<th style="text-align: right;">valor_remuneracao_julho</th>
-<th style="text-align: right;">valor_remuneracao_agosto</th>
-<th style="text-align: right;">valor_remuneracao_setembro</th>
-<th style="text-align: right;">valor_remuneracao_outubro</th>
-<th style="text-align: right;">valor_remuneracao_novembro</th>
-<th style="text-align: right;">valor_remuneracao_dezembro</th>
-<th style="text-align: left;">tipo_salario</th>
-<th style="text-align: right;">valor_salario_contratual</th>
-<th style="text-align: left;">subatividade_ibge</th>
-<th style="text-align: left;">subsetor_ibge</th>
-<th style="text-align: left;">cbo_1994</th>
-<th style="text-align: left;">cbo_2002</th>
-<th style="text-align: left;">cnae_1</th>
-<th style="text-align: left;">cnae_2</th>
-<th style="text-align: left;">cnae_2_subclasse</th>
-<th style="text-align: left;">faixa_etaria</th>
-<th style="text-align: right;">idade</th>
-<th style="text-align: left;">grau_instrucao_1985_2005</th>
-<th style="text-align: left;">grau_instrucao_apos_2005</th>
-<th style="text-align: left;">nacionalidade</th>
-<th style="text-align: left;">sexo</th>
-<th style="text-align: left;">raca_cor</th>
-<th style="text-align: right;">indicador_portador_deficiencia</th>
-<th style="text-align: left;">tipo_deficiencia</th>
-<th style="text-align: right;">ano_chegada_brasil</th>
-<th style="text-align: left;">tamanho_estabelecimento</th>
-<th style="text-align: left;">tipo_estabelecimento</th>
-<th style="text-align: left;">natureza_juridica</th>
-<th style="text-align: right;">indicador_simples</th>
-<th style="text-align: left;">bairros_sp</th>
-<th style="text-align: left;">distritos_sp</th>
-<th style="text-align: left;">bairros_fortaleza</th>
-<th style="text-align: left;">bairros_rj</th>
-<th style="text-align: left;">regioes_administrativas_df</th>
+<th style="text-align: right;">media_salario</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">1985</td>
-<td style="text-align: left;">AM</td>
-<td style="text-align: left;">1300102</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">1.1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">1.27</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">1.14</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7014</td>
-<td style="text-align: left;">24</td>
-<td style="text-align: left;">39970</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">6</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">10</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">3457.553</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">1985</td>
-<td style="text-align: left;">AM</td>
-<td style="text-align: left;">1300102</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">1.1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">1.33</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">1.31</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7014</td>
-<td style="text-align: left;">24</td>
-<td style="text-align: left;">39970</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">5</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">10</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">3702.131</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">1985</td>
-<td style="text-align: left;">AM</td>
-<td style="text-align: left;">1300102</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">1.1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">2.22</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">1.54</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7014</td>
-<td style="text-align: left;">24</td>
-<td style="text-align: left;">14220</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">10</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">4229.452</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">1985</td>
-<td style="text-align: left;">AM</td>
-<td style="text-align: left;">1300102</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">1.1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">2.54</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">5</td>
-<td style="text-align: right;">3.95</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7014</td>
-<td style="text-align: left;">24</td>
-<td style="text-align: left;">14220</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">10</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">4409.327</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">1985</td>
-<td style="text-align: left;">AM</td>
-<td style="text-align: left;">1300102</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: right;">0.2</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">5</td>
-<td style="text-align: right;">4.56</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">5</td>
-<td style="text-align: right;">3.66</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7014</td>
-<td style="text-align: left;">24</td>
-<td style="text-align: left;">14220</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">3</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">7</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">4969.977</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">4886.116</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">4969.408</td>
 </tr>
 </tbody>
 </table>
+<p><img src="hello-world_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
+</div>
+<h2 id="como-a-média-salarial-varia-regionalmente"><strong>Como a média salarial varia regionalmente?</strong></h2>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sigla_uf</th>
+<th style="text-align: right;">media_uf</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">RJ</td>
+<td style="text-align: right;">7303.597</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DF</td>
+<td style="text-align: right;">6290.945</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SP</td>
+<td style="text-align: right;">5053.901</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PA</td>
+<td style="text-align: right;">4239.167</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PE</td>
+<td style="text-align: right;">4014.886</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AM</td>
+<td style="text-align: right;">4003.298</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SE</td>
+<td style="text-align: right;">3733.273</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CE</td>
+<td style="text-align: right;">3583.833</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BA</td>
+<td style="text-align: right;">3444.450</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RS</td>
+<td style="text-align: right;">3434.072</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MG</td>
+<td style="text-align: right;">3373.300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GO</td>
+<td style="text-align: right;">3053.561</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SC</td>
+<td style="text-align: right;">3033.095</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PR</td>
+<td style="text-align: right;">2835.612</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RR</td>
+<td style="text-align: right;">2780.840</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MS</td>
+<td style="text-align: right;">2671.339</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MT</td>
+<td style="text-align: right;">2520.127</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RN</td>
+<td style="text-align: right;">2495.838</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AP</td>
+<td style="text-align: right;">2488.921</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ES</td>
+<td style="text-align: right;">2289.896</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AC</td>
+<td style="text-align: right;">2213.220</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TO</td>
+<td style="text-align: right;">1981.932</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RO</td>
+<td style="text-align: right;">1943.391</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AL</td>
+<td style="text-align: right;">1921.249</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PB</td>
+<td style="text-align: right;">1852.823</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PI</td>
+<td style="text-align: right;">1556.301</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MA</td>
+<td style="text-align: right;">1518.701</td>
+</tr>
+</tbody>
+</table>
+<p><img src="hello-world_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
+</div>
+<p><strong>E se olhássemos a mediana?</strong></p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="hello-world_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+</div>
+<h2 id="como-a-média-salarial-varia-por-sexo"><strong>Como a média salarial varia por sexo?</strong></h2>
+1 homem 2 mulher
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sexo</th>
+<th style="text-align: right;">media</th>
+<th style="text-align: right;">mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">5331.746</td>
+<td style="text-align: right;">3905.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">3600.132</td>
+<td style="text-align: right;">2300.71</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="como-a-média-salarial-varia-por-etnia"><strong>Como a média salarial varia por etnia?</strong></h2>
+<p>1 indígena 2 branco 4 negro 6 amarelo 8 pardo 9 não identificado</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">raca_cor</th>
+<th style="text-align: right;">media</th>
+<th style="text-align: right;">mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">3085.090</td>
+<td style="text-align: right;">2748.890</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">4287.588</td>
+<td style="text-align: right;">2888.915</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">3014.454</td>
+<td style="text-align: right;">2072.205</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">6783.212</td>
+<td style="text-align: right;">5338.735</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">2732.073</td>
+<td style="text-align: right;">1749.345</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">5656.755</td>
+<td style="text-align: right;">4888.030</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="e-se-juntar-etnia-e-sexo"><strong>E se juntar etnia e sexo?</strong></h2>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">sexo</th>
+<th style="text-align: left;">raca_cor</th>
+<th style="text-align: right;">media</th>
+<th style="text-align: right;">mediana</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">3159.286</td>
+<td style="text-align: right;">2816.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">5242.819</td>
+<td style="text-align: right;">3650.350</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">3399.138</td>
+<td style="text-align: right;">2284.440</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">7896.945</td>
+<td style="text-align: right;">6314.250</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">3229.096</td>
+<td style="text-align: right;">2030.745</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">6663.501</td>
+<td style="text-align: right;">6702.870</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">2960.319</td>
+<td style="text-align: right;">2595.230</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">3662.732</td>
+<td style="text-align: right;">2561.010</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">2736.654</td>
+<td style="text-align: right;">1927.200</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">5805.064</td>
+<td style="text-align: right;">4680.625</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: right;">2427.978</td>
+<td style="text-align: right;">1609.990</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">9</td>
+<td style="text-align: right;">4575.110</td>
+<td style="text-align: right;">2571.270</td>
+</tr>
+</tbody>
+</table>
+<p><img src="hello-world_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

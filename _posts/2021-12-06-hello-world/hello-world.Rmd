@@ -15,9 +15,11 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r, inclusde =F}
+```{r, include=F}
 library(bigrquery)
 library(dplyr)
+library(ggplot2)
+library(forcats)
 ```
 
 Nesse relatório, o interesse é responder: **Quanto ganha um cientista de dados?**
@@ -40,12 +42,129 @@ conexao <- dbConnect(
   dataset = "br_me_rais", # nome da base
   billing = "rais-2021-cursor" # id do projeto na Bando dos Dados
 )
-
-cinco_linhas <- collect(head(select(tbl(conexao, "microdados_vinculos"),everything()), 5))
 ```
 
 
-```{r, echo=F}
-knitr::kable(cinco_linhas)
+Queremos analisar a base de pessoas que _provavelmente_ trabalham com ciências de dados. O Código Brasileiro de Ocupações (CBO) tem um o cadastro de todas as ocupações formais do Brasil,e iremos filtrar a base RAIS e analisar os códigos relacionados à ciência de dados, como os de pesquisa/cientista e estatística, desde 2013.
+
+
+```{r,  echo = T}
+codigos_cbo <- c("252515", "252525", "211110", "211205", "211210","411035", "131120","211215")
+
+tabela_microdados_vinculos <- tbl(conexao, "microdados_vinculos") %>%
+  select(everything()) %>% 
+  filter(
+    ano >= 2013,
+    cbo_2002 %in% codigos_cbo) %>% 
+  collect() # traz os dados pra máquina local
+
+saveRDS(tabela_microdados_vinculos, "tabela_microdados_vinculos.rds")
+```
+
+
+## **Como a média salarial varia no tempo?**
+
+```{r, echo=FALSE}
+tabela_medias <- tabela_microdados_vinculos %>% 
+  group_by(ano) %>% 
+  summarise(media_salario = mean(valor_remuneracao_media))
+
+knitr::kable(tabela_medias)
+
+ggplot(tabela_medias) +
+  aes(x = ano, y = media_salario) +
+  geom_col() +
+  scale_x_continuous(breaks = 2013:2019) + # Para mostrar todos os anos
+  theme_classic() +
+  labs( x = "", y = "Média Salarial R$")
+```
+
+
+## **Como a média salarial varia regionalmente?**
+
+```{r, echo=FALSE}
+tabela_media_uf <- tabela_microdados_vinculos %>% 
+  group_by(sigla_uf) %>% 
+  summarise(media_uf = mean(valor_remuneracao_media)) %>% 
+  mutate(sigla_uf = fct_reorder(sigla_uf, media_uf)) %>% # cria fator ordenado relativo à média
+  arrange(desc(sigla_uf)) # reorganiza em ordem descrecente
+
+
+knitr::kable(tabela_media_uf)
+
+ggplot(tabela_media_uf) +
+  aes(y = sigla_uf, x = media_uf) +
+  geom_col() +
+  theme_classic() +
+  labs( y = "Estados", x = "Média Salarial R$")
+
+```
+
+**E se olhássemos a mediana?**
+
+```{r}
+tabela_mediana_uf <- tabela_microdados_vinculos %>% 
+  group_by(sigla_uf) %>% 
+  summarise(mediana_uf = median(valor_remuneracao_media)) %>% 
+  mutate(sigla_uf = fct_reorder(sigla_uf, mediana_uf)) %>%
+  arrange(desc(sigla_uf)) 
+
+ggplot(tabela_mediana_uf) +
+  aes(y = sigla_uf, x = mediana_uf) +
+  geom_col() +
+  theme_classic() +
+  labs( y = "Estados", x = "Mediana Salarial R$")
+```
+
+
+## **Como a média salarial varia por sexo?**
+
+1 homem
+2 mulher
+```{r}
+tabela_resumo_sexo <- tabela_microdados_vinculos %>% 
+  group_by(sexo) %>% 
+  summarise(media = mean(valor_remuneracao_media),
+            mediana = median(valor_remuneracao_media))
+
+knitr::kable(tabela_resumo_sexo)
+```
+
+## **Como a média salarial varia por etnia?**
+
+1 indígena
+2 branco
+4 negro
+6 amarelo
+8 pardo
+9 não identificado
+
+```{r}
+tabela_resumo_etnia <- tabela_microdados_vinculos %>% 
+  group_by(raca_cor) %>% 
+  summarise(media = mean(valor_remuneracao_media),
+            mediana = median(valor_remuneracao_media))
+
+knitr::kable(tabela_resumo_etnia)
+```
+
+
+
+
+## **E se juntar etnia e sexo?**
+
+```{r}
+tabela_resumo <- tabela_microdados_vinculos %>% 
+  group_by(sexo, raca_cor) %>% 
+  summarise(media = mean(valor_remuneracao_media),
+            mediana = median(valor_remuneracao_media))
+
+knitr::kable(tabela_resumo)
+
+ggplot(tabela_resumo) +
+  aes(x = raca_cor, y = media, fill = sexo) +
+  geom_col(position = 'dodge') +
+  theme_classic() +
+  labs( x = "Etnia", y = "Média Salarial R$")
 ```
 
