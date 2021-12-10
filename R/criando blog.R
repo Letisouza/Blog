@@ -19,3 +19,11 @@ distill::create_blog(".", "Leticia de Souza", gh_pages = T)
 
 # Criando posts: gera um Rmd para edição de textos. Em geral, fazer no console.
 distill::create_post("Hello, world")
+
+###### NÃO RODAR ######
+
+# mudando o tema
+distill:create_theme("tema") # dento das aspas, nome arbitário
+# Add 'theme: tema.css' to your site or article YAML
+# depois, knitar o arquivo index.rmd para aplicar no blog.
+

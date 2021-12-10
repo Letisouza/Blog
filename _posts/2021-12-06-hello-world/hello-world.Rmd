@@ -3,7 +3,7 @@ title: "Base RAIS"
 description: |
   Análise dos salários da base RAIS
 author:
-  - name: Leticia de Souza
+  - name: Leticia
     url: https://letisouza.github.io/Blog/
 date: 2021-12-07
 output:
@@ -48,7 +48,7 @@ conexao <- dbConnect(
 Queremos analisar a base de pessoas que _provavelmente_ trabalham com ciências de dados. O Código Brasileiro de Ocupações (CBO) tem um o cadastro de todas as ocupações formais do Brasil,e iremos filtrar a base RAIS e analisar os códigos relacionados à ciência de dados, como os de pesquisa/cientista e estatística, desde 2013.
 
 
-```{r,  echo = T}
+```{r,  echo = F, eval = F}
 codigos_cbo <- c("252515", "252525", "211110", "211205", "211210","411035", "131120","211215")
 
 tabela_microdados_vinculos <- tbl(conexao, "microdados_vinculos") %>%
@@ -59,12 +59,18 @@ tabela_microdados_vinculos <- tbl(conexao, "microdados_vinculos") %>%
   collect() # traz os dados pra máquina local
 
 saveRDS(tabela_microdados_vinculos, "tabela_microdados_vinculos.rds")
+
 ```
+
+```{r, echo = F}
+tabela_microdados_vinculos <- readRDS("tabela_microdados_vinculos.rds")
+```
+
 
 
 ## **Como a média salarial varia no tempo?**
 
-```{r, echo=FALSE}
+```{r, echo=F}
 tabela_medias <- tabela_microdados_vinculos %>% 
   group_by(ano) %>% 
   summarise(media_salario = mean(valor_remuneracao_media))
@@ -76,13 +82,13 @@ ggplot(tabela_medias) +
   geom_col() +
   scale_x_continuous(breaks = 2013:2019) + # Para mostrar todos os anos
   theme_classic() +
-  labs( x = "", y = "Média Salarial R$")
+  labs(x = "", y = "Média Salarial R$")
 ```
 
 
 ## **Como a média salarial varia regionalmente?**
 
-```{r, echo=FALSE}
+```{r, echo=F}
 tabela_media_uf <- tabela_microdados_vinculos %>% 
   group_by(sigla_uf) %>% 
   summarise(media_uf = mean(valor_remuneracao_media)) %>% 
@@ -96,13 +102,13 @@ ggplot(tabela_media_uf) +
   aes(y = sigla_uf, x = media_uf) +
   geom_col() +
   theme_classic() +
-  labs( y = "Estados", x = "Média Salarial R$")
+  labs(y = "Estados", x = "Média Salarial R$")
 
 ```
 
 **E se olhássemos a mediana?**
 
-```{r}
+```{r, echo=F}
 tabela_mediana_uf <- tabela_microdados_vinculos %>% 
   group_by(sigla_uf) %>% 
   summarise(mediana_uf = median(valor_remuneracao_media)) %>% 
@@ -121,7 +127,7 @@ ggplot(tabela_mediana_uf) +
 
 1 homem
 2 mulher
-```{r}
+```{r, echo=F}
 tabela_resumo_sexo <- tabela_microdados_vinculos %>% 
   group_by(sexo) %>% 
   summarise(media = mean(valor_remuneracao_media),
@@ -139,7 +145,7 @@ knitr::kable(tabela_resumo_sexo)
 8 pardo
 9 não identificado
 
-```{r}
+```{r, echo=F}
 tabela_resumo_etnia <- tabela_microdados_vinculos %>% 
   group_by(raca_cor) %>% 
   summarise(media = mean(valor_remuneracao_media),
@@ -153,7 +159,7 @@ knitr::kable(tabela_resumo_etnia)
 
 ## **E se juntar etnia e sexo?**
 
-```{r}
+```{r, echo=F}
 tabela_resumo <- tabela_microdados_vinculos %>% 
   group_by(sexo, raca_cor) %>% 
   summarise(media = mean(valor_remuneracao_media),
@@ -165,6 +171,8 @@ ggplot(tabela_resumo) +
   aes(x = raca_cor, y = media, fill = sexo) +
   geom_col(position = 'dodge') +
   theme_classic() +
-  labs( x = "Etnia", y = "Média Salarial R$")
+  labs(x = "Etnia", y = "Média Salarial R$", fill = "Sexo") +
+  scale_fill_viridis_d()  # troca a cor dos gráfico para pessoas daltônicas
 ```
+
 
