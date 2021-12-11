@@ -29,7 +29,7 @@ RAIS significa Relação Anual de Informações Sociais, do Ministério da Econo
 
 Para acessar, a inciativa Base dos Dados coleta esses microdados por meio do datalake.
 
-[RAIS](https://basedosdados.org/dataset/br-me-rais)
+Para acessar, clique: [RAIS](https://basedosdados.org/dataset/br-me-rais)
 
 
 
