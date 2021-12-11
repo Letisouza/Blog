@@ -176,3 +176,22 @@ ggplot(tabela_resumo) +
 ```
 
 
+```{r include=F}
+tabela_microdados_vinculos %>% 
+  filter(valor_remuneracao_media > 0) %>% 
+  ggplot(aes(x = log(valor_remuneracao_media))) +
+  geom_histogram() +
+  facet_wrap(~cbo_2002, scales = 'free')
+
+tabela_modelo <- tabela_microdados_vinculos %>% 
+  filter(valor_remuneracao_media > 0,  cbo_2002 == "252525", grau_instrucao_apos_2005 != "1") %>% # cbo: Analista financeiro
+  mutate(log_valor_remuneracao_media = log(valor_remuneracao_media))
+
+modelo <- lm(log_valor_remuneracao_media ~ idade + grau_instrucao_apos_2005 + sexo*raca_cor + indicador_portador_deficiencia + tamanho_estabelecimento + quantidade_horas_contratadas, tabela_modelo)
+
+summary(modelo)
+
+exp(predict(modelo, newdata = data.frame(idade = 32, quantidade_horas_contratadas = 40, grau_instrucao_apos_2005 = "10", sexo = "2", raca_cor = "6", indicador_portador_deficiencia = 0, tamanho_estabelecimento = "10")))
+```
+
+
